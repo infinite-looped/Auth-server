@@ -1,0 +1,1 @@
+//Returns authenticated user info
