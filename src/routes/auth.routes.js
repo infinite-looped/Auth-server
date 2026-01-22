@@ -4,23 +4,19 @@ const express = require("express");
 const router = express.Router();
 
 const { signupController, loginController} = require("../controllers/auth.controller");
+const { signupSchema, loginSchema } = require("../validators/auth.schema");
+const validate = require("../middleware/validate.middleware");
 
-const authMiddleware = require("../middleware/auth.middleware");
+
 const bruteforceMiddleware = require("../middleware/bruteForce.middleware");
 
 
 //signup
-router.post("/signup", signupController);
+router.post("/signup",  validate(signupSchema), signupController);
 
 //login
-router.post("/login",bruteforceMiddleware, loginController);
+router.post("/login",validate(loginSchema), bruteforceMiddleware, loginController);
 
-// Get current user
-router.get("/me", authMiddleware, (req, res)=> {
-    res.status(200).json({
-        success: true,
-        user: req.user,
-    })
-});
+
 
 module.exports = router;

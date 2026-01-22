@@ -3,10 +3,11 @@
 
 const {login, signup} = require("../services/auth.service");
 const {setRefreshTokenCookie} = require("../utils/cookie.util");
+const {signupSchema, loginSchema} = require("../validators/auth.schema");
 
 const signupController = async (req, res, next) => {
     try{
-        
+        signupSchema.parse(req.body);
         const { email, password} = req.body;
         const user = await signup({email, password});
         res.status(201).json({
@@ -20,6 +21,7 @@ const signupController = async (req, res, next) => {
 }
 const loginController = async(req, res, next) => {
     try{
+        loginSchema.parse(req.body);
         const {email, password} = req.body;
         const {accessToken, refreshToken} = await login({
             email,

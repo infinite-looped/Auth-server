@@ -8,7 +8,9 @@ const errorMiddleware = require("./middleware/error.middleware");
 
 const authRoutes = require("./routes/auth.routes");
 const tokenRoutes = require("./routes/token.routes");
-
+const userRoutes = require("./routes/user.routes");
+const passwordRoutes = require("./routes/password.routes");
+const oauthRoutes = require("./routes/oauth.routes");
 const app = express();
 
 /* ---------------- GLOBAL MIDDLEWARES ---------------- */
@@ -38,8 +40,11 @@ app.get("/health", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/auth", tokenRoutes);
+app.use("/auth", userRoutes);
+app.use("/auth", passwordRoutes);
+app.use("/auth", oauthRoutes);
 
-/* ---------------- ERROR HANDLER (LAST) ---------------- */
+/* ---------------- ERROR HANDLER  ---------------- */
 
 app.use(errorMiddleware);
 
