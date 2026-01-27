@@ -2,7 +2,7 @@
 const redis = require("../config/redis.config")
 
 const MAX_ATTTEMPTS = 5;
-const LOCK_DURATION= 10 * 60 * 1000; 
+const LOCK_DURATION= 10 * 60 ; 
 
 //Brute force protection middleware
 //Applies to login / forgot-password

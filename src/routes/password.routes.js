@@ -24,7 +24,7 @@ const {
 router.post(
   "/forgot-password",
   validate(forgotPasswordSchema),
-  bruteForceMiddleware,
+  bruteForceMiddleware, 
   forgotPasswordController
 );
 

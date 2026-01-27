@@ -42,7 +42,7 @@ app.use("/auth", authRoutes);
 app.use("/auth", tokenRoutes);
 app.use("/auth", userRoutes);
 app.use("/auth", passwordRoutes);
-app.use("/auth", oauthRoutes);
+app.use("/auth/oauth", oauthRoutes);
 
 /* ---------------- ERROR HANDLER  ---------------- */
 
