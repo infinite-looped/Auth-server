@@ -35,7 +35,7 @@ const signup = async ({email, password}) => {
 //login (verifies user credential and issues token)
 
 const login = async ({email, password, userAgent, ipAddress}) => {
-    const user = await user.findOne({email});
+    const user = await User.findOne({email});
     if(!user || !user.password) {
         const err = new Error("Invalid credentials");
         err.statusCode = 401;

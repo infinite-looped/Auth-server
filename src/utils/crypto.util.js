@@ -6,7 +6,7 @@ const generateRandomToken = () => {
 };
 // hashing token before storing in DB
 
-const hashToken = () => {
+const hashToken = (token) => {
     return crypto.createHash("sha256").update(token).digest("hex");
 };
 
