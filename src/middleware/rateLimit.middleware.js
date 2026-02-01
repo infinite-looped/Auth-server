@@ -3,6 +3,7 @@ const rateLimit = require("express-rate-limit");
 const RedisStore = require("rate-limit-redis").default;;
 const redis = require("../config/redis.config");
 const globalRateLimiter = rateLimit({
+    
     windowMs: 15 * 60 * 1000,
     max: 100,
     standardHeaders: true, //Return rate limit info in headers
@@ -15,6 +16,7 @@ const globalRateLimiter = rateLimit({
         message: "Too many request. Please try again later"
     }
 });
+
 
 module.exports = {
     globalRateLimiter,

@@ -8,16 +8,17 @@ const router = express.Router();
 const { signupController, loginController} = require("../controllers/auth.controller");
 const { signupSchema, loginSchema } = require("../validators/auth.schema");
 const validate = require("../middleware/validate.middleware");
+const { globalRateLimiter } = require("../middleware/rateLimit.middleware");
 
 
 const bruteforceMiddleware = require("../middleware/bruteForce.middleware");
 
 
 //signup
-router.post("/signup",  validate(signupSchema), signupController);
+router.post("/signup", globalRateLimiter,  validate(signupSchema), signupController);
 
 //login
-router.post("/login",validate(loginSchema), bruteforceMiddleware, loginController);
+router.post("/login",globalRateLimiter, validate(loginSchema), bruteforceMiddleware, loginController);
 
 
 

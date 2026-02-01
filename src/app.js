@@ -3,7 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const { globalRateLimiter } = require("./middleware/rateLimit.middleware");
+
 const errorMiddleware = require("./middleware/error.middleware");
 
 const authRoutes = require("./routes/auth.routes");
@@ -13,19 +13,22 @@ const passwordRoutes = require("./routes/password.routes");
 const oauthRoutes = require("./routes/oauth.routes");
 const app = express();
 
+app.set("trust proxy", 1);
+
 /* ---------------- GLOBAL MIDDLEWARES ---------------- */
 
-// Global rate limiter (applies to all routes)
-app.use(globalRateLimiter);
+
 
 // Body & cookie parsers
 app.use(express.json());
 app.use(cookieParser());
 
+
+
 // CORS
 app.use(
   cors({
-    origin: "http://localhost:5175", // replace with actual frontend origin
+    origin: process.env.CLIENT_URL, // replace with actual frontend origin
     credentials: true,
   })
 );

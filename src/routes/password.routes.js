@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
+const { globalRateLimiter } = require("../middleware/rateLimit.middleware");
 const {
   forgotPasswordController,
   resetPasswordController,
@@ -23,6 +24,7 @@ const {
  */
 router.post(
   "/forgot-password",
+  globalRateLimiter,
   validate(forgotPasswordSchema),
   bruteForceMiddleware, 
   forgotPasswordController
@@ -34,6 +36,7 @@ router.post(
  */
 router.post(
   "/reset-password",
+  globalRateLimiter,
   validate(resetPasswordSchema),
   resetPasswordController
 );

@@ -7,8 +7,8 @@ const setRefreshTokenCookie = (res, refreshToken) => {
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: env.nodeEnv === "production",
-        sameSite: "strict",
-        path: "/auth/refresh",
+        sameSite: "lax",
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 };
@@ -18,8 +18,8 @@ const clearRefreshTokenCookie = (res) => {
     res.clearCookie("refreshToken",{
         httpOnly: true,
         secure: env.nodeEnv === "production",
-        sameSite: "strict",
-        path: "/auth/refresh",        
+        sameSite: "lax",
+        path: "/",       
     });
 };
 

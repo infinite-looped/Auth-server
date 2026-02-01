@@ -44,13 +44,13 @@ const googleCallbackController = async (req, res, next) => {
     // CSRF protection
     if (!state || state !== savedState) {
       return res.status(403).json({
-        message: "Invalid OAuth state. Possible CSRF attack.",
+        message: "Invalid OAuth state.",
       });
     }
 
     res.clearCookie("oauth_state");
 
-    const { accessToken, refreshToken } = await handleOAuthCallback({
+    const { refreshToken } = await handleOAuthCallback({
       provider: "google",
       code,
       userAgent: req.headers["user-agent"],
@@ -62,7 +62,7 @@ const googleCallbackController = async (req, res, next) => {
 
     // Redirect back to frontend
     res.redirect(
-      `${process.env.CLIENT_URL}/oauth-success?accessToken=${accessToken}`
+     `${process.env.CLIENT_URL}/oauth-success`
     );
   } catch (err) {
     next(err);

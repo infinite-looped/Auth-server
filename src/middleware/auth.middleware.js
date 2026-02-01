@@ -3,7 +3,7 @@
 const { verifyAccessToken } = require("../utils/jwt.util")
 
 //Authenticate requests using JWT access token
-const authMiddleware = (res, req, next) =>{
+const authMiddleware = (req, res, next) =>{
     try{
         const authHeader = req.headers.authorization;
         if(!authHeader || !authHeader.startsWith("Bearer ")){
